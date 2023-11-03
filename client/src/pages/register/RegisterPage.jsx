@@ -106,11 +106,11 @@ const RegisterPage = () => {
       <span className='text-dark-hard'>Yes</span>
     </label>
 
-    <label className='ml-2 text-sm font-medium text-gray-900 dark:text-gray-300 flex items-center items-center'>
+    <label className='ml-2 text-sm font-medium text-gray-900 dark:text-gray-300 flex items-center'>
       <input
         type='radio'
         id='no'
-        value="true"
+        value="false"
         {...register('voteChoice', {
           required: 'Voting choice is required'
         })}

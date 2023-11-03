@@ -48,3 +48,4 @@ export const userProfile = async (req, res, next) => {
         next(error);
     }
 };
+

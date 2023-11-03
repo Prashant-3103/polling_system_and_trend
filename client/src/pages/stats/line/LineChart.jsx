@@ -54,6 +54,3 @@ console.log(voteCountByDate);
 };
 
 export default LineChart;
-
-
-
