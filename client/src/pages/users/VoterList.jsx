@@ -2,11 +2,14 @@ import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import toast from 'react-hot-toast';
 import axios from 'axios';
+import LineChart from '../stats/line/LineChart';
+import BarChart from '../stats/bar/BarChart';
 
 const VoterList = () => {
     const navigate = useNavigate();
     const [user, setUser] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
+    const [chartData, setChartData] = useState({ labels: [], voted: [] }); // Declare chartData state
 
     useEffect(() => {
         axios.get('http://localhost:5000/api/users/profile')
@@ -19,23 +22,34 @@ const VoterList = () => {
                         ...userItem,
                         createdAt: new Date(userItem.createdAt).toLocaleDateString('en-US', {
                             year: 'numeric',
-                            month: 'short',
+                      month: 'short',
                             day: 'numeric',
                             hour: 'numeric',
                             minute: 'numeric',
                             second: 'numeric'
                         }),
 
+
                     };
                 });
-                setUser(formattedUsers);
-                setIsLoading(false)
-            })
+// Filter users who voted "yes"
+const newChartData = {
+    labels: formattedUsers.map((userItem) => userItem.createdAt),
+    voted: formattedUsers.map((userItem) => userItem.voteChoice), // Push the actual voteChoice value
+  };
+  console.log(newChartData);
+
+  setChartData(newChartData); // Set chartData state here
+  setUser(formattedUsers);
+  setIsLoading(false);
+})
             .catch(err => {
                 toast.error(err.message);
                 console.error(err);
             });
     }, []);
+
+
 
     return (
         <div className="px-4 py-4 -mx-4 overflow-x-auto sm:-mx-8 sm:px-8">
@@ -43,6 +57,7 @@ const VoterList = () => {
            {!isLoading && <div className="inline-block min-w-full overflow-hidden rounded-lg shadow">
                <button className='border-2 border-blue-500 px-6 py-2 rounded-full text-full-500 font-semibold hover:bg-blue-500 hover:text-white transition-all duration-300'> <Link to='/register' >Register USER</Link></button>
                <button className='border-2 border-blue-500 px-6 py-2 rounded-full text-full-500 font-semibold hover:bg-blue-500 hover:text-white transition-all duration-300'> <Link to='/' >BACK TO HOME</Link></button>
+               <button className='border-2 border-blue-500 px-6 py-2 rounded-full text-full-500 font-semibold hover:bg-blue-500 hover:text-white transition-all duration-300'> <Link to='/stats' >STATISTICS</Link></button>
                 <table className='min-w-full leading-normal'>
                     <thead>
                         <tr>
@@ -64,8 +79,19 @@ const VoterList = () => {
                             ))}
                     </tbody>
                 </table>
-                <button className='border-2 border-blue-500 px-6 py-2 rounded-full text-full-500 font-semibold hover:bg-blue-500 hover:text-white transition-all duration-300'> <Link to='/' >BACK TO HOME</Link></button>
-            </div>}
+
+
+
+                <button className='border-2 m-2 border-blue-500 px-6 py-2 rounded-full text-full-500 font-semibold hover:bg-blue-500 hover:text-white transition-all duration-300'> Line</button>
+
+                <LineChart data={chartData} />
+                <button className='border-2 m-2 border-blue-500 px-6 py-2 rounded-full text-full-500 font-semibold hover:bg-blue-500 hover:text-white transition-all duration-300'> BAR CHART</button>
+                <BarChart data={chartData}/>
+                </div>
+
+
+            }
+
         </div>
     );
 }

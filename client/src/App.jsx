@@ -3,6 +3,8 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import HomePage from './pages/home/HomePage';
 import RegisterPage from './pages/register/RegisterPage';
 import VoterList from './pages/users/VoterList';
+import Stats from './pages/stats/Stats';
+import { Line } from 'react-chartjs-2';
 
 function App() {
   return (
@@ -12,6 +14,8 @@ function App() {
           <Route path='/' element={<HomePage />} />
           <Route  path='/register' element={<RegisterPage/>}/>
           <Route  path='/voters' element={<VoterList/>}/>
+          <Route  path='/stats' element={<Stats/>}/>
+          <Route  path='/line' element={<Line/>}/>
         </Routes>
 
     </div>
