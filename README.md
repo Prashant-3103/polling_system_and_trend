@@ -45,7 +45,7 @@
 * Mongoose JS docs
 * Javascript docs
 
-#The supported pictures are uploaded in the screenshot directory
+# The supported pictures are uploaded in the screenshot directory
 
 
 
