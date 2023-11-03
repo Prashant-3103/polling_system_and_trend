@@ -7,7 +7,7 @@ import { Link, Navigate, useNavigate } from 'react-router-dom';
 const navItemsInfo = [
     { name: "Home", type: "link", href: "/" },
     { name: "Voters", type: "link", href: "/voters" },
-    { name: "Statistics", type: "link", href: "/stats" },
+    
 ]
 
 const NavItem = ({ item }) => {
@@ -68,7 +68,7 @@ const Header = () => {
     }
 
   return (
-    <section className="sticky top-0 left-0 right-0 z-50 bg-white">
+    <section className="sticky top-0 left-0 right-0 z-50 bg-[#E6E6FA]">
             <header className='container mx-auto px-5 flex justify-between py-4 items-center'>
             <Link to="/">
                     <img

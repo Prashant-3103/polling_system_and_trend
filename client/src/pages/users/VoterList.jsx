@@ -20,7 +20,7 @@ const VoterList = () => {
                 const formattedUsers = res.data.map(userItem => {
                     return {
                         ...userItem,
-                        createdAt: new Date(userItem.createdAt).toLocaleDateString('en-US', {
+                        date: new Date(userItem.date).toLocaleDateString('en-US', {
                             year: 'numeric',
                       month: 'short',
                             day: 'numeric',
@@ -34,7 +34,7 @@ const VoterList = () => {
                 });
 // Filter users who voted "yes"
 const newChartData = {
-    labels: formattedUsers.map((userItem) => userItem.createdAt),
+    labels: formattedUsers.map((userItem) => userItem.date),
     voted: formattedUsers.map((userItem) => userItem.voteChoice), // Push the actual voteChoice value
   };
   console.log(newChartData);
@@ -52,29 +52,29 @@ const newChartData = {
 
 
     return (
-        <div className="px-4 py-4 -mx-4 overflow-x-auto sm:-mx-8 sm:px-8">
+        <div className="px-4 py-4  -mx-4 overflow-x-auto sm:-mx-8 sm:px-8 bg-[#E6E6FA]">
             {isLoading && <p className='text-dark-light mt-3 text-sm md:text-lg text-center' >Wait, users are being rendered...</p>}
            {!isLoading && <div className="inline-block min-w-full overflow-hidden rounded-lg shadow">
-               <button className='border-2 border-blue-500 px-6 py-2 rounded-full text-full-500 font-semibold hover:bg-blue-500 hover:text-white transition-all duration-300'> <Link to='/register' >Register USER</Link></button>
+               <button className='border-2 mb-2 border-blue-500 px-6 py-2 rounded-full text-full-500 font-semibold hover:bg-blue-500 hover:text-white transition-all duration-300'> <Link to='/register' >Register USER</Link></button>
                <button className='border-2 border-blue-500 px-6 py-2 rounded-full text-full-500 font-semibold hover:bg-blue-500 hover:text-white transition-all duration-300'> <Link to='/' >BACK TO HOME</Link></button>
                <button className='border-2 border-blue-500 px-6 py-2 rounded-full text-full-500 font-semibold hover:bg-blue-500 hover:text-white transition-all duration-300'> <Link to='/stats' >STATISTICS</Link></button>
-                <table className='min-w-full leading-normal'>
+                <table className='min-w-full leading-normal bg-[#8467D7]'>
                     <thead>
                         <tr>
-                            <th className="px-5 py-3 text-sm font-normal text-left text-gray-800 uppercase bg-white border-b border-gray-200">Name</th>
-                            <th className="px-5 py-3 text-sm font-normal text-left text-gray-800 uppercase bg-white border-b border-gray-200">Email</th>
-                            <th className="px-5 py-3 text-sm font-normal text-left text-gray-800 uppercase bg-white border-b border-gray-200">Voting Choice</th>
-                            <th className="px-5 py-3 text-sm font-normal text-left text-gray-800 uppercase bg-white border-b border-gray-200">Date</th>
+                            <th className="px-5 py-3 text-sm font-normal text-left text-gray-800 uppercase bg-[#8467D7] border-b border-gray-200">Name</th>
+                            <th className="px-5 py-3 text-sm font-normal text-left text-gray-800 uppercase bg-[#8467D7] border-b border-gray-200">Email</th>
+                            <th className="px-5 py-3 text-sm font-normal text-left text-gray-800 uppercase bg-[#8467D7] border-b border-gray-200">Voting Choice</th>
+                            <th className="px-5 py-3 text-sm font-normal text-left text-gray-800 uppercase bg-[#8467D7] border-b border-gray-200">Date</th>
                         </tr>
                     </thead>
                     <tbody>
                         {user && user.length > 0 &&
                             user.map((userItem, userIndex) => (
                                 <tr key={userItem._id}>
-                                    <td className="px-5 py-5 text-sm bg-white border-b border-gray-200">{userItem.name}</td>
-                                    <td className="px-5 py-5 text-sm bg-white border-b border-gray-200">{userItem.email}</td>
-                                    <td className="px-5 py-5 text-sm bg-white border-b border-gray-200">{userItem.voteChoice}</td>
-                                    <td className="px-5 py-5 text-sm bg-white border-b border-gray-200">{userItem.createdAt}</td>
+                                    <td className="px-5 py-5 text-sm bg-[#E6E6FA] border-b border-gray-200">{userItem.name}</td>
+                                    <td className="px-5 py-5 text-sm bg-[#E6E6FA] border-b border-gray-200">{userItem.email}</td>
+                                    <td className="px-5 py-5 text-sm bg-[#E6E6FA] border-b border-gray-200">{userItem.voteChoice}</td>
+                                    <td className="px-5 py-5 text-sm bg-[#E6E6FA] border-b border-gray-200">{userItem.date}</td>
                                 </tr>
                             ))}
                     </tbody>

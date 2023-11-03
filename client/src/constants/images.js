@@ -1,5 +1,5 @@
 import Logo from "../assets/logo.png";
-
-const images = {Logo}
+import Vote from '../assets/vote.jpg'
+const images = {Logo, Vote}
 
 export default images
