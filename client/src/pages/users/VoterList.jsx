@@ -52,12 +52,16 @@ console.log(newChartData);
     return { date, trueVotes, falseVotes };
   });
 
+  const handleNavigateRegister=()=>
+  {
+    navigate('/register')
+  }
 
     return (
         <div className="px-4 py-4  -mx-4 overflow-x-auto sm:-mx-8 sm:px-8 bg-[#E6E6FA]">
             {isLoading && <p className='text-dark-light mt-3 text-sm md:text-lg text-center' >Wait, users are being rendered...</p>}
            {!isLoading && <div className="inline-block min-w-full overflow-hidden rounded-lg shadow">
-               <button className='border-2 mx-2 mb-2 border-blue-500 px-6 py-2 rounded-full text-full-500 font-semibold hover:bg-blue-500 hover:text-white transition-all duration-300'> <Link to='/register' >Register USER</Link></button>
+               <button className='border-2 mx-2 mb-2 border-blue-500 px-6 py-2 rounded-full text-full-500 font-semibold hover:bg-blue-500 hover:text-white transition-all duration-300'> <Link to='/register' onClick={handleNavigateRegister} >Register USER</Link></button>
                <button className='border-2 border-blue-500 px-6 py-2 rounded-full text-full-500 font-semibold hover:bg-blue-500 hover:text-white transition-all duration-300'> <Link to='/' >BACK TO HOME</Link></button>
                 <table className='min-w-full leading-normal bg-[#8467D7]'>
                     <thead>
@@ -89,8 +93,6 @@ console.log(newChartData);
                 <button className='border-2 m-2 border-blue-500 px-6 py-2 rounded-full text-full-500 font-semibold hover:bg-blue-500 hover:text-white transition-all duration-300'> BAR CHART</button>
                 <BarChart data={chartData}/>
                 </div>
-
-
             }
 
         </div>
