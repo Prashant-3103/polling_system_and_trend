@@ -6,7 +6,7 @@ export const errorResponseHandler = (err,req,res,next)=>{
     })
 }
 
-export const invalidPathHandler = (req,res,next) =>{
+export const invalidPathHandler = (req,res,next) => {
     let error = new Error("Invalid Path")
     error.statusCode = 400;
     next(error)

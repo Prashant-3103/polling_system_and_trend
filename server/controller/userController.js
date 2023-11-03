@@ -2,7 +2,7 @@ import User from "../model/user.js";
 
 export const registerUser = async (req, res, next) => {
     try {
-        const { name, email,password, vote_choice, date } = req.body;
+        const { name,email,voteChoice, date } = req.body;
 
         // Check whether user exists
         let user = await User.findOne({ email });
@@ -15,16 +15,14 @@ export const registerUser = async (req, res, next) => {
         user = await User.create({
             name,
             email,
-            password,
-            vote_choice,
+            voteChoice,
             date
         });
 
         return res.status(201).json({
             name: user.name,
             email: user.email,
-            password: user.password,
-            vote_choice: user.vote_choice,
+            voteChoice: user.voteChoice,
             date: date,
             token: await user.generateJWT(),
         });

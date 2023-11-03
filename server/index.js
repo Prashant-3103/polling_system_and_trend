@@ -4,12 +4,21 @@ import dotenv from 'dotenv';
 import userRoutes from './routes/userRoutes.js';
 import { errorResponseHandler } from './middleware/errorHandler.js';
 import { invalidPathHandler } from './middleware/errorHandler.js';
-
+import bodyParser from 'body-parser';
+import cors from 'cors'
 const app = express();
 
 dotenv.config();
 
 app.use(express.json());
+
+app.use(cors({
+    origin: 'http://localhost:5173', // Allow requests from this origin
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+    credentials: true,
+  }));
+
+  app.use(bodyParser.json());
 
 const connectDB = async () => {
     try {
