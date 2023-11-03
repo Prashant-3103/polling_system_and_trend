@@ -18,8 +18,8 @@ const RegisterPage = () => {
       return signup({ name, email, voteChoice, date });
     },
     onSuccess: (data) => {
+      toast.success("User is successfully registered")
       dispatch(userActions.setUserInfo(data));
-
     },
     onError: (error) => {
       toast.error(error.message);
