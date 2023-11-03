@@ -97,7 +97,7 @@ const RegisterPage = () => {
       <input
         type="radio"
         id="yes"
-        value={true}
+        value="true"
         {...register("voteChoice", {
           required: 'Voting choice is required'
         })}
@@ -110,7 +110,7 @@ const RegisterPage = () => {
       <input
         type='radio'
         id='no'
-        value='false'
+        value="true"
         {...register('voteChoice', {
           required: 'Voting choice is required'
         })}

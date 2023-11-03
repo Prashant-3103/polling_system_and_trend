@@ -6,49 +6,51 @@ import LineChart from '../stats/line/LineChart';
 import BarChart from '../stats/bar/BarChart';
 
 const VoterList = () => {
-    const navigate = useNavigate();
-    const [user, setUser] = useState([]);
-    const [isLoading, setIsLoading] = useState(true);
-    const [chartData, setChartData] = useState({ labels: [], voted: [] }); // Declare chartData state
+  const navigate = useNavigate();
+  const [user, setUser] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [chartData, setChartData] = useState({ labels: [], voted: [] });
 
-    useEffect(() => {
-        axios.get('http://localhost:5000/api/users/profile')
-            .then(res => {
-                toast.success("Users list is successfully rendered");
-                console.log(res.data);
-                // Format createdAt date before setting it in the state
-                const formattedUsers = res.data.map(userItem => {
-                    return {
-                        ...userItem,
-                        date: new Date(userItem.date).toLocaleDateString('en-US', {
-                            year: 'numeric',
-                      month: 'short',
-                            day: 'numeric',
-                            hour: 'numeric',
-                            minute: 'numeric',
-                            second: 'numeric'
-                        }),
+  useEffect(() => {
+    axios.get('http://localhost:5000/api/users/profile')
+      .then(res => {
+        toast.success("Users list is successfully rendered");
+        console.log(res.data);
+        const formattedUsers = res.data.map(userItem => {
+          return {
+            ...userItem,
+            date: new Date(userItem.date).toLocaleDateString('en-US', {
+              year: 'numeric',
+              month: 'short',
+              day: 'numeric',
+              hour: 'numeric',
+              minute: 'numeric',
+              second: 'numeric'
+            }),
+          };
+        });
 
+        const newChartData = {
+          labels: formattedUsers.map((userItem) => userItem.date),
+          voted: formattedUsers.map((userItem) => userItem.voteChoice),
+        };
+console.log(newChartData);
+        setChartData(newChartData);
+        setUser(formattedUsers);
+        setIsLoading(false);
+      })
+      .catch(err => {
+        toast.error(err.message);
+        console.error(err);
+      });
+  }, []);
 
-                    };
-                });
-// Filter users who voted "yes"
-const newChartData = {
-    labels: formattedUsers.map((userItem) => userItem.date),
-    voted: formattedUsers.map((userItem) => userItem.voteChoice), // Push the actual voteChoice value
-  };
-  console.log(newChartData);
-
-  setChartData(newChartData); // Set chartData state here
-  setUser(formattedUsers);
-  setIsLoading(false);
-})
-            .catch(err => {
-                toast.error(err.message);
-                console.error(err);
-            });
-    }, []);
-
+  // Preprocess data to count true and false votes for each day
+  const processedChartData = chartData.labels.map((date) => {
+    const trueVotes = chartData.voted.filter((vote) => vote === true && date === vote.date).length;
+    const falseVotes = chartData.voted.filter((vote) => vote === false && date === vote.date).length;
+    return { date, trueVotes, falseVotes };
+  });
 
 
     return (

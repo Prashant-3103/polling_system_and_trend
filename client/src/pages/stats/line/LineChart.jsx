@@ -8,9 +8,9 @@ const LineChart = ({ data }) => {
   data.labels.forEach((date, index) => {
     const vote = data.voted[index];
     if (date in voteCountByDate) {
-      if (vote) {
+      if (vote==="true") {
         voteCountByDate[date].trueVotes += 1;
-      } else {
+      } else if (vote==="false") {
         voteCountByDate[date].falseVotes += 1;
       }
     } else {
@@ -54,3 +54,6 @@ console.log(voteCountByDate);
 };
 
 export default LineChart;
+
+
+

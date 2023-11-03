@@ -5,7 +5,7 @@ const Hero = () => {
   return (
     <section className='container mx-auto flex flex-col px-5 py-5 lg:flex-row'>
       <div className='mt-10 lg:w-1/2'>
-      <h1 className='font-roboto text-3xl text-center font-bold text-dark-soft lg:text-4xl xl:text-5xl  md:text-5xl lg:text-left lg:max-w-[540px] '>Journey from <span className='text-dark-spansoft italic font-cursive'>
+      <h1 className='font-roboto text-3xl text-center font-bold text-dark-soft lg:text-4xl xl:text-5xl  md:text-5xl lg:text-left lg:max-w-[540px] '>Looking into <span className='text-dark-spansoft italic font-cursive'>
     VOTING POLLS
 </span>
 , line chart and Bar chart  </h1>
