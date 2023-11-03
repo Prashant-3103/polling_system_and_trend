@@ -90,7 +90,7 @@ const RegisterPage = () => {
 )}
     </div>
 
-    <div className='flex flex-col mb-6 w-full'>
+    <div className='flex flex-col mb-6 w-full items-center '>
   <label htmlFor="votingChoice" className='text-[#5a7184] font-semibold block mb-2'>Your Choice</label>
   <div className='flex items-center space-x-4'>
     <label className='ml-2 text-sm font-medium text-gray-900 dark:text-gray-300'>
@@ -106,7 +106,7 @@ const RegisterPage = () => {
       <span className='text-dark-hard'>Yes</span>
     </label>
 
-    <label className='ml-2 text-sm font-medium text-gray-900 dark:text-gray-300'>
+    <label className='ml-2 text-sm font-medium text-gray-900 dark:text-gray-300 flex items-center items-center'>
       <input
         type='radio'
         id='no'
@@ -114,7 +114,7 @@ const RegisterPage = () => {
         {...register('voteChoice', {
           required: 'Voting choice is required'
         })}
-        className='w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600'
+        className='w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600 align-middle'
       />
       <span className='text-dark-hard'>No</span>
     </label>
@@ -149,8 +149,7 @@ const RegisterPage = () => {
 
 
 <button type='submit' disabled={!isValid || isLoading} className='bg-primary font-bold text-white text-lg py-4 px-8 w-full rounded-lg mb-6 disabled:opacity-70 disabled:cursor-not-allowed' >Register</button>
-<p className='text-sm font-semibold text-[#5a7184]'>You have an account? <Link to="/login" className='text-primary'>Login now</Link>
-</p>
+
 </form>
 
 </div>
