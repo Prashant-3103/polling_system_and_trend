@@ -6,6 +6,7 @@ import axios from 'axios';
 const VoterList = () => {
     const navigate = useNavigate();
     const [user, setUser] = useState([]);
+    const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
         axios.get('http://localhost:5000/api/users/profile')
@@ -28,6 +29,7 @@ const VoterList = () => {
                     };
                 });
                 setUser(formattedUsers);
+                setIsLoading(false)
             })
             .catch(err => {
                 toast.error(err.message);
@@ -37,7 +39,8 @@ const VoterList = () => {
 
     return (
         <div className="px-4 py-4 -mx-4 overflow-x-auto sm:-mx-8 sm:px-8">
-            <div className="inline-block min-w-full overflow-hidden rounded-lg shadow">
+            {isLoading && <p className='text-dark-light mt-3 text-sm md:text-lg text-center' >Wait, users are being rendered...</p>}
+           {!isLoading && <div className="inline-block min-w-full overflow-hidden rounded-lg shadow">
                <button className='border-2 border-blue-500 px-6 py-2 rounded-full text-full-500 font-semibold hover:bg-blue-500 hover:text-white transition-all duration-300'> <Link to='/register' >Register USER</Link></button>
                <button className='border-2 border-blue-500 px-6 py-2 rounded-full text-full-500 font-semibold hover:bg-blue-500 hover:text-white transition-all duration-300'> <Link to='/' >BACK TO HOME</Link></button>
                 <table className='min-w-full leading-normal'>
@@ -62,7 +65,7 @@ const VoterList = () => {
                     </tbody>
                 </table>
                 <button className='border-2 border-blue-500 px-6 py-2 rounded-full text-full-500 font-semibold hover:bg-blue-500 hover:text-white transition-all duration-300'> <Link to='/' >BACK TO HOME</Link></button>
-            </div>
+            </div>}
         </div>
     );
 }
